@@ -3,9 +3,16 @@ from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 from contextlib import asynccontextmanager
 
+import logging
+
 from api import router as api_router
 from core.config import settings
 from core.models import db_helper
+
+logging.basicConfig(
+    level=settings.logging.log_level_value,
+    format=settings.logging.log_format,
+)
 
 
 @asynccontextmanager
