@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 import logging
 
 from api import router as api_router
+from api.webhooks import webhooks_router
 from core.config import settings
 from core.models import db_helper
 
@@ -27,6 +28,7 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(
     default_response_class=ORJSONResponse,
     lifespan=lifespan,
+    webhooks=webhooks_router,
 )
 main_app.include_router(api_router)
 
